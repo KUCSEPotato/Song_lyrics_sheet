@@ -28,7 +28,7 @@ jobs:
           python -m pip install -r requirements-dev.txt
 
       - name: Run tests
-        run: pytest
+        run: python -m pytest
 
       - name: Build Windows executable
         run: pyinstaller --noconfirm --clean LyricsWorksheet.spec

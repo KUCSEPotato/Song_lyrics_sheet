@@ -57,7 +57,7 @@ python app.py
 ## 테스트 방법
 
 ```bash
-pytest
+python -m pytest
 python -m compileall .
 ```
 
@@ -70,7 +70,7 @@ python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 python -m pip install -r requirements-dev.txt
-pytest
+python -m pytest
 pyinstaller --noconfirm --clean LyricsWorksheet.spec
 ```
 

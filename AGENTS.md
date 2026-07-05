@@ -22,7 +22,7 @@
 변경 후 반드시 다음 명령을 실행합니다.
 
 ```bash
-pytest
+python -m pytest
 python -m compileall .
 ```
 
