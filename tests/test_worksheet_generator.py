@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from worksheet_generator import create_worksheet_pdf
+from worksheet_generator import _normalize_lyrics_text, create_worksheet_pdf
 
 
 def test_create_worksheet_pdf_creates_pdf(tmp_path: Path) -> None:
@@ -49,6 +49,12 @@ def test_create_worksheet_pdf_handles_blank_lines(tmp_path: Path) -> None:
 
     assert result.exists()
     assert result.stat().st_size > 0
+
+
+def test_normalize_lyrics_text_joins_line_breaks_with_one_space() -> None:
+    lyrics = "어쩌다가\n한바탕\t\t턱\n\n빠지게"
+
+    assert _normalize_lyrics_text(lyrics) == "어쩌다가 한바탕 턱 빠지게"
 
 
 @pytest.mark.parametrize(

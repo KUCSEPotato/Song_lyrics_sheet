@@ -149,25 +149,30 @@ def _build_row_groups(
     practice_rows: int,
 ) -> list[list[list[str]]]:
     groups: list[list[list[str]]] = []
+    normalized_lyrics = _normalize_lyrics_text(lyrics)
 
-    for original_line in lyrics.splitlines():
-        if original_line == "":
-            groups.append(_blank_group(columns, practice_rows))
-            continue
-
-        for chunk in _split_line(original_line, columns):
-            display_row = ["" if _is_spacing_character(char) else char for char in chunk]
-            display_row.extend([""] * (columns - len(display_row)))
-            groups.append(
-                [display_row]
-                + [[""] * columns for _ in range(practice_rows)]
-            )
+    for chunk in _split_line(normalized_lyrics, columns):
+        display_row = ["" if _is_spacing_character(char) else char for char in chunk]
+        display_row.extend([""] * (columns - len(display_row)))
+        groups.append(
+            [display_row]
+            + [[""] * columns for _ in range(practice_rows)]
+        )
 
     return groups
 
 
-def _blank_group(columns: int, practice_rows: int) -> list[list[str]]:
-    return [[""] * columns for _ in range(practice_rows + 1)]
+def _normalize_lyrics_text(lyrics: str) -> str:
+    normalized_characters: list[str] = []
+
+    for char in lyrics:
+        if char.isspace():
+            if normalized_characters and normalized_characters[-1] != " ":
+                normalized_characters.append(" ")
+            continue
+        normalized_characters.append(char)
+
+    return "".join(normalized_characters).strip()
 
 
 def _paginate_row_groups(

@@ -40,7 +40,7 @@ class LyricsWorksheetWindow(QMainWindow):
         self.title_input = QLineEdit(DEFAULT_TITLE)
         self.lyrics_input = QPlainTextEdit()
         self.lyrics_input.setPlaceholderText(
-            "가사를 여기에 붙여넣으세요.\n입력한 줄바꿈은 학습지에도 반영됩니다."
+            "가사를 여기에 붙여넣으세요.\n줄바꿈은 한 칸 공백으로 이어집니다."
         )
 
         self.columns_input = QSpinBox()
